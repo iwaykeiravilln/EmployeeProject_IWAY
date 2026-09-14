@@ -6,15 +6,15 @@ public class Name {
     private String middleInit;
 
     public Name() {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.middleInit = middleInit;
+        this.firstName = "N/A";
+        this.lastName = "N/A";
+        this.middleInit = "";
     }
 
     public Name(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.middleInit = middleInit;
+        this.middleInit = "";
     }
 
     public Name(String firstName, String lastName, String middleInit) {
@@ -49,8 +49,6 @@ public class Name {
 
     @Override
     public String toString() {
-        return middleInit.isEmpty() ?
-                firstName + " " + lastName :
-                firstName + " " + middleInit + " " + lastName;
+        return (middleInit == null || middleInit.isEmpty()) ? firstName + " " + lastName : firstName + " " + middleInit + ". " + lastName;
     }
 }
