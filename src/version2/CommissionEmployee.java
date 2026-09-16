@@ -15,9 +15,6 @@ public class CommissionEmployee {
     private double totalSale;
 
     public CommissionEmployee() {
-        this.empID = 0;
-        this.empName = "N/A";
-        this.totalSale = 0.0;
     }
 
     public CommissionEmployee(int empID, String empName) {

@@ -1,4 +1,4 @@
-package version2;
+package version3;
 
 public class MyDate {
     private int day;
@@ -6,6 +6,9 @@ public class MyDate {
     private int year;
 
     public MyDate() {
+        this.day = 1;
+        this.month = 1;
+        this.year = 2000;
     }
 
     public MyDate(int day, int month, int year) {

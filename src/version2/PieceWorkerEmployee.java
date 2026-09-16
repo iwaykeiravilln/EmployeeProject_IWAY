@@ -15,10 +15,6 @@ public class PieceWorkerEmployee {
     private double ratePerPiece;
 
     public PieceWorkerEmployee(){
-        this.empID = 0;
-        this.empName = "N/A";
-        this.totalPiecesFinished = 0;
-        this.ratePerPiece = 0.0;
     }
 
     public PieceWorkerEmployee(int empID, String empName){

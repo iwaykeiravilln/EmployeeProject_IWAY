@@ -6,9 +6,6 @@ public class Name {
     private String middleInit;
 
     public Name() {
-        this.firstName = "N/A";
-        this.lastName = "N/A";
-        this.middleInit = "";
     }
 
     public Name(String firstName, String lastName) {

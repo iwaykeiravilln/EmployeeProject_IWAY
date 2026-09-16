@@ -5,8 +5,6 @@ package version1;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-import version2.Name;
-
 /**
  *
  * @author User
@@ -52,7 +50,7 @@ public class HourlyEmployee {
         return empName;
     }
 
-    public void setEmpName(Name empName) {
+    public void setEmpName(String empName) {
         this.empName = empName;
     }
 

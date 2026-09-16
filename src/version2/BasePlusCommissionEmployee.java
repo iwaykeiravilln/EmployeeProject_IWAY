@@ -15,10 +15,6 @@ public class BasePlusCommissionEmployee {
     private double baseSalary;
 
     public BasePlusCommissionEmployee() {
-        this.empID = 0;
-        this.empName = "N/A";
-        this.totalSale = 0.0;
-        this.baseSalary = 0.0;
     }
 
     public BasePlusCommissionEmployee(int empID, String empName) {

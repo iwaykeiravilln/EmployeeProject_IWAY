@@ -9,11 +9,6 @@ public class HourlyEmployee {
     private double ratePerHour;
 
     public HourlyEmployee() {
-        this.empID = 0;
-        this.empName = new Name();
-        this.birthDate = new MyDate();
-        this.totalHoursWorked = 0.0f;
-        this.ratePerHour = 0.0;
     }
 
     public HourlyEmployee(int empID, String empName) {
