@@ -1,34 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package version2;
-/**
- *
- * @author User
- */
-public class PieceWorkerEmployee {
 
+public class PieceWorkerEmployee {
     private int empID;
-    private String empName;
+    private Name empName;
+    private MyDate birthDate;
+    private MyDate dateHired;
     private int totalPiecesFinished;
     private double ratePerPiece;
 
-    public PieceWorkerEmployee(){
-    }
-
-    public PieceWorkerEmployee(int empID, String empName){
-        this.empID = empID;
-        this.empName = empName;
+    public PieceWorkerEmployee() {
+        this.empID = 0;
+        this.empName = new Name();
+        this.birthDate = new MyDate();
+        this.dateHired = new MyDate();
         this.totalPiecesFinished = 0;
         this.ratePerPiece = 0.0;
     }
 
-    public PieceWorkerEmployee(int empID, String empName, int totalPiecesFinished, double ratePerPiece){
+    public PieceWorkerEmployee(int empID, Name empName) {
         this.empID = empID;
         this.empName = empName;
-        this.totalPiecesFinished = totalPiecesFinished;
-        this.ratePerPiece = ratePerPiece;
+        this.birthDate = new MyDate();
+        this.dateHired = new MyDate();
+        this.totalPiecesFinished = 0;
+        this.ratePerPiece = 0.0;
+    }
+
+    public PieceWorkerEmployee(int empID, Name empName, MyDate birthDate, MyDate dateHired,
+                               int totalPiecesFinished, double ratePerPiece) {
+        this.empID = empID;
+        this.empName = empName;
+        this.birthDate = birthDate;
+        this.dateHired = dateHired;
+        setTotalPiecesFinished(totalPiecesFinished);
+        setRatePerPiece(ratePerPiece);
     }
 
     public int getEmpID() {
@@ -39,12 +44,28 @@ public class PieceWorkerEmployee {
         this.empID = empID;
     }
 
-    public String getEmpName() {
+    public Name getEmpName() {
         return empName;
     }
 
-    public void setEmpName(String empName) {
+    public void setEmpName(Name empName) {
         this.empName = empName;
+    }
+
+    public MyDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(MyDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public MyDate getDateHired() {
+        return dateHired;
+    }
+
+    public void setDateHired(MyDate dateHired) {
+        this.dateHired = dateHired;
     }
 
     public int getTotalPiecesFinished() {
@@ -63,20 +84,34 @@ public class PieceWorkerEmployee {
         this.ratePerPiece = (ratePerPiece >= 0) ? ratePerPiece : 0.0;
     }
 
-    //methods
+    private double baseEarnings() {
+        double basePay = totalPiecesFinished * ratePerPiece;
+        int totalHundreds = totalPiecesFinished / 100;
+        double bonusPay = totalHundreds * (10 * ratePerPiece);
+        return basePay + bonusPay;
+    }
+
+    public double computeSalary(int currentMonth) {
+        double salary = baseEarnings();
+        if (birthDate.getMonth() == currentMonth) {
+            salary += 5000.00;
+        }
+        return salary;
+    }
+
     public double computeSalary() {
-        double basepay = totalPiecesFinished * ratePerPiece;
-        int totalHundreds = totalPiecesFinished/100;
-        double bonuspay = totalHundreds * (10 * ratePerPiece);
-        return basepay + bonuspay;
+        return baseEarnings();
     }
 
     public void displayPieceWorkerEmployee() {
-        System.out.printf("ID: %d | Name: %s | Pieces Finished: %d | Rate/Piece: PHP%.2f/hr\n", empID, empName, totalPiecesFinished, ratePerPiece);
+        System.out.printf("ID: %d | Name: %s | DOB: %s | Hired: %s | Pieces Finished: %d | Rate/Piece: PHP%.2f%n",
+                empID, empName, birthDate, dateHired, totalPiecesFinished, ratePerPiece);
     }
 
     @Override
     public String toString() {
-        return String.format("PieceWorkerEmployee [ID: %d, Name: %s, Pieces: %d, Rate: PHP%.2f, Total Salary: PHP%.2f]",empID, empName, totalPiecesFinished, ratePerPiece, computeSalary());
+        return String.format(
+                "PieceWorkerEmployee [ID: %d, Name: %s, DOB: %s, Hired: %s, Pieces: %d, Rate: PHP%.2f, Total Salary: PHP%.2f]",
+                empID, empName, birthDate, dateHired, totalPiecesFinished, ratePerPiece, computeSalary());
     }
 }

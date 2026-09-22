@@ -29,7 +29,7 @@ public class CommissionEmployee {
     public CommissionEmployee(int empID, String empName, double totalSale) {
         this.empID = empID;
         this.empName = empName;
-        this.totalSale = totalSale;
+        setTotalSale(totalSale);
     }
 
     public int getEmpID() {

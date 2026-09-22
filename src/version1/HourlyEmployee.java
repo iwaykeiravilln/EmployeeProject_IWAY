@@ -33,8 +33,8 @@ public class HourlyEmployee {
     public HourlyEmployee(int empID, String empName, float totalHoursWorked, double ratePerHour) {
         this.empID = empID;
         this.empName = empName;
-        this.totalHoursWorked = totalHoursWorked;
-        this.ratePerHour = ratePerHour;
+        setTotalHoursWorked(totalHoursWorked);
+        setRatePerHour(ratePerHour);
     }
 
     //setters and getters 
@@ -67,7 +67,7 @@ public class HourlyEmployee {
     }
 
     public void setRatePerHour(double ratePerHour) {
-        this.ratePerHour = ratePerHour;
+        this.ratePerHour = (ratePerHour >= 0) ? ratePerHour : 0.0;
     }
     
     //methods

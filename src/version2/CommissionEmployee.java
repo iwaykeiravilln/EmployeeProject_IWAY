@@ -1,32 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package version2;
 
-/**
- *
- * @author User
- */
 public class CommissionEmployee {
-
     private int empID;
-    private String empName;
+    private Name empName;
+    private MyDate birthDate;
+    private MyDate dateHired;
     private double totalSale;
 
     public CommissionEmployee() {
-    }
-
-    public CommissionEmployee(int empID, String empName) {
-        this.empID = empID;
-        this.empName = empName;
+        this.empID = 0;
+        this.empName = new Name();
+        this.birthDate = new MyDate();
+        this.dateHired = new MyDate();
         this.totalSale = 0.0;
     }
 
-    public CommissionEmployee(int empID, String empName, double totalSale) {
+    public CommissionEmployee(int empID, Name empName) {
         this.empID = empID;
         this.empName = empName;
-        this.totalSale = totalSale;
+        this.birthDate = new MyDate();
+        this.dateHired = new MyDate();
+        this.totalSale = 0.0;
+    }
+
+    public CommissionEmployee(int empID, Name empName, MyDate birthDate, MyDate dateHired, double totalSale) {
+        this.empID = empID;
+        this.empName = empName;
+        this.birthDate = birthDate;
+        this.dateHired = dateHired;
+        setTotalSale(totalSale);
     }
 
     public int getEmpID() {
@@ -37,12 +39,28 @@ public class CommissionEmployee {
         this.empID = empID;
     }
 
-    public String getEmpName() {
+    public Name getEmpName() {
         return empName;
     }
 
-    public void setEmpName(String empName) {
+    public void setEmpName(Name empName) {
         this.empName = empName;
+    }
+
+    public MyDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(MyDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public MyDate getDateHired() {
+        return dateHired;
+    }
+
+    public void setDateHired(MyDate dateHired) {
+        this.dateHired = dateHired;
     }
 
     public double getTotalSale() {
@@ -53,29 +71,43 @@ public class CommissionEmployee {
         this.totalSale = (totalSale >= 0) ? totalSale : 0.0;
     }
 
-    public double computeSalary() {
-        double commissionRate;
-
+    private double getCommissionRate() {
         if (totalSale < 50000) {
-            commissionRate = 0.05;
+            return 0.05;
         } else if (totalSale < 100000) {
-            commissionRate = 0.10;
+            return 0.10;
         } else if (totalSale < 500000) {
-            commissionRate = 0.15;
+            return 0.15;
         } else {
-            commissionRate = 0.20;
+            return 0.20;
         }
-        return totalSale * commissionRate;
     }
 
-    public void displayCommissionEmployee(){
-        System.out.printf("ID: %d | Name: %s | Total Sale: PHP%.2f\n", empID, empName, totalSale);
+    private double baseEarnings() {
+        return totalSale * getCommissionRate();
+    }
+
+    public double computeSalary(int currentMonth) {
+        double salary = baseEarnings();
+        if (birthDate.getMonth() == currentMonth) {
+            salary += 5000.00;
+        }
+        return salary;
+    }
+
+    public double computeSalary() {
+        return baseEarnings();
+    }
+
+    public void displayCommissionEmployee() {
+        System.out.printf("ID: %d | Name: %s | DOB: %s | Hired: %s | Total Sale: PHP%.2f%n",
+                empID, empName, birthDate, dateHired, totalSale);
     }
 
     @Override
     public String toString() {
-        return String.format("CommissionEmployee [ID: %d, Name: %s, Total Sale: PHP%.2f, Total Salary: PHP%.2f]",empID, empName, totalSale, computeSalary());
+        return String.format(
+                "CommissionEmployee [ID: %d, Name: %s, DOB: %s, Hired: %s, Total Sale: PHP%.2f, Commission Rate: %.0f%%, Total Salary: PHP%.2f]",
+                empID, empName, birthDate, dateHired, totalSale, getCommissionRate() * 100, computeSalary());
     }
-
-
 }

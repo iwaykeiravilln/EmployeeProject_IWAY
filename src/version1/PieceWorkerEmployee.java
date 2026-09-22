@@ -27,12 +27,12 @@ public class PieceWorkerEmployee {
         this.totalPiecesFinished = 0;
         this.ratePerPiece = 0.0;
     }
-    
+
     public PieceWorkerEmployee(int empID, String empName, int totalPiecesFinished, double ratePerPiece){
-        this.empID = empID;       
+        this.empID = empID;
         this.empName = empName;
-        this.totalPiecesFinished = totalPiecesFinished;
-        this.ratePerPiece = ratePerPiece;
+        setTotalPiecesFinished(totalPiecesFinished);
+        setRatePerPiece(ratePerPiece);
     }
 
     public int getEmpID() {
@@ -56,7 +56,7 @@ public class PieceWorkerEmployee {
     }
 
     public void setTotalPiecesFinished(int totalPiecesFinished) {
-        this.totalPiecesFinished = (totalPiecesFinished >= 0) ? totalPiecesFinished : 0;
+        this.totalPiecesFinished = Math.max(totalPiecesFinished, 0);
     }
 
     public double getRatePerPiece() {
@@ -69,14 +69,14 @@ public class PieceWorkerEmployee {
     
     //methods
     public double computeSalary() {
-        double basepay = totalPiecesFinished * ratePerPiece;
+        double base = totalPiecesFinished * ratePerPiece;
         int totalHundreds = totalPiecesFinished/100; 
-        double bonuspay = totalHundreds * (10 * ratePerPiece); 
-        return basepay + bonuspay; 
+        double bonus = totalHundreds * (10 * ratePerPiece);
+        return base + bonus;
     }
 
     public void displayPieceWorkerEmployee() {
-        System.out.printf("ID: %d | Name: %s | Pieces Finished: %d | Rate/Piece: PHP%.2f/hr\n", empID, empName, totalPiecesFinished, ratePerPiece);
+        System.out.printf("ID: %d | Name: %s | Pieces Finished: %d | Rate/Piece: PHP%.2f\n", empID, empName, totalPiecesFinished, ratePerPiece);
     }
 
     @Override

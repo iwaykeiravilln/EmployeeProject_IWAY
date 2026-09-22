@@ -27,12 +27,12 @@ public class BasePlusCommissionEmployee {
         this.totalSale = 0.0;
         this.baseSalary = 0.0;
     }
-    
+
     public BasePlusCommissionEmployee(int empID, String empName, double totalSale, double baseSalary) {
         this.empID = empID;
         this.empName = empName;
-        this.totalSale = totalSale;
-        this.baseSalary = baseSalary;
+        setTotalSale(totalSale);
+        setBaseSalary(baseSalary);
     }
     
     //setters and getters
@@ -57,7 +57,7 @@ public class BasePlusCommissionEmployee {
     }
 
     public void setTotalSale(double totalSale) {
-        this.totalSale = totalSale;
+        this.totalSale = (totalSale >= 0) ? totalSale : 0.0;
     }
 
     public double getBaseSalary() {
@@ -65,21 +65,23 @@ public class BasePlusCommissionEmployee {
     }
 
     public void setBaseSalary(double baseSalary) {
-        this.baseSalary = baseSalary;
+        this.baseSalary = (baseSalary >= 0) ? baseSalary : 0.0;
     }
-    
-    public double computeSalary() {
-        double commissionRate = 0.0; 
-        
-        if (this.totalSale > 50000) {
-            commissionRate = 0.15; 
-        } else if (this.totalSale > 20000) {
-            commissionRate = 0.10;
-        } else if (this.totalSale > 0) {
-            commissionRate = 0.05;
+
+    private double getCommissionRate() {
+        if (totalSale < 50000) {
+            return 0.05;
+        } else if (totalSale < 100000) {
+            return 0.10;
+        } else if (totalSale < 500000) {
+            return 0.15;
+        } else {
+            return 0.20;
         }
-        
-        return this.baseSalary + (totalSale * commissionRate); 
+    }
+
+    public double computeSalary() {
+        return this.baseSalary + (totalSale * getCommissionRate());
     }
     
     public void displayBasePlusCommissionEmployee(){ 
@@ -88,8 +90,7 @@ public class BasePlusCommissionEmployee {
 
     @Override
     public String toString() {
-        return String.format("BasePlusCommissionEmployee [ID: %d, Name: %s, Sale: PHP%.2f, Base: PHP%.2f, Total Salary: PHP%.2f]",empID, empName, totalSale, baseSalary, computeSalary()); 
+        return String.format("BasePlusCommissionEmployee [ID: %d, Name: %s, Sale: PHP%.2f, Base: PHP%.2f, Total Salary: PHP%.2f]",empID, empName, totalSale, baseSalary, computeSalary());
     }
-    
     
 }

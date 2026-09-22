@@ -1,9 +1,16 @@
 package version3;
 
-public class MyDate {
+import java.util.Objects;
+
+public class MyDate implements Cloneable {
     private int day;
     private int month;
     private int year;
+
+    private static final String[] MONTH_NAMES = {
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    };
 
     public MyDate() {
         this.day = 1;
@@ -12,8 +19,8 @@ public class MyDate {
     }
 
     public MyDate(int day, int month, int year) {
-        this.day = day;
-        this.month = month;
+        setMonth(month);
+        setDay(day);
         this.year = year;
     }
 
@@ -22,6 +29,9 @@ public class MyDate {
     }
 
     public void setDay(int day) {
+        if (day < 1 || day > 31) {
+            throw new IllegalArgumentException("Day must be between 1 and 31.");
+        }
         this.day = day;
     }
 
@@ -30,6 +40,9 @@ public class MyDate {
     }
 
     public void setMonth(int month) {
+        if (month < 1 || month > 12) {
+            throw new IllegalArgumentException("Month must be between 1 and 12.");
+        }
         this.month = month;
     }
 
@@ -41,8 +54,36 @@ public class MyDate {
         this.year = year;
     }
 
+    public void displayDate() {
+        System.out.println(toString());
+    }
+
+    // Format: DD Mon YYYY
     @Override
     public String toString() {
-        return String.format("%02d/%02d/%04d", month, day, year);
+        return String.format("%02d %s %04d", day, MONTH_NAMES[month - 1], year);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof MyDate)) return false;
+        MyDate other = (MyDate) obj;
+        return day == other.day && month == other.month && year == other.year;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(day, month, year);
+    }
+
+    @Override
+    public MyDate clone() {
+        try {
+            // Only primitive fields, so super.clone() is a sufficient deep copy
+            return (MyDate) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError("MyDate should be cloneable", e);
+        }
     }
 }

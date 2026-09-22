@@ -2,30 +2,36 @@ package version2;
 
 public class Name {
     private String firstName;
+    private String middleName;
     private String lastName;
-    private String middleInit;
+    private String suffix;
 
     public Name() {
+        this.firstName = "N/A";
+        this.middleName = "N/A";
+        this.lastName = "N/A";
+        this.suffix = "";
     }
 
     public Name(String firstName, String lastName) {
         this.firstName = firstName;
+        this.middleName = "";
         this.lastName = lastName;
-        this.middleInit = "";
+        this.suffix = "";
     }
 
-    public Name(String firstName, String lastName, String middleInit) {
+    public Name(String firstName, String middleName, String lastName) {
         this.firstName = firstName;
+        this.middleName = middleName;
         this.lastName = lastName;
-        this.middleInit = middleInit;
+        this.suffix = "";
     }
 
-    public String getMiddleInit() {
-        return middleInit;
-    }
-
-    public void setMiddleInit(String middleInit) {
-        this.middleInit = middleInit;
+    public Name(String firstName, String middleName, String lastName, String suffix) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.suffix = suffix;
     }
 
     public String getFirstName() {
@@ -36,6 +42,14 @@ public class Name {
         this.firstName = firstName;
     }
 
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
     public String getLastName() {
         return lastName;
     }
@@ -44,8 +58,26 @@ public class Name {
         this.lastName = lastName;
     }
 
+    public String getSuffix() {
+        return suffix;
+    }
+
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
+    }
+
+    private String buildFormatted() {
+        String mi = (middleName == null || middleName.isEmpty()) ? "" : " " + middleName.charAt(0) + ".";
+        String suf = (suffix == null || suffix.isEmpty()) ? "" : " " + suffix;
+        return lastName + ", " + firstName + mi + suf;
+    }
+
+    public void displayName() {
+        System.out.println(buildFormatted());
+    }
+
     @Override
     public String toString() {
-        return (middleInit == null || middleInit.isEmpty()) ? firstName + " " + lastName : firstName + " " + middleInit + ". " + lastName;
+        return buildFormatted();
     }
 }
