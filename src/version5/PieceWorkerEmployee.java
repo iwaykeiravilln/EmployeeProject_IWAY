@@ -1,4 +1,4 @@
-package version3;
+package version5;
 
 import java.util.Objects;
 
@@ -12,8 +12,7 @@ public class PieceWorkerEmployee extends Employee {
         this.ratePerPiece = 0.0;
     }
 
-    public PieceWorkerEmployee(int empID, Name empName, MyDate birthDate, MyDate dateHired,
-                               int totalPiecesFinished, double ratePerPiece) {
+    public PieceWorkerEmployee(int empID, Name empName, MyDate birthDate, MyDate dateHired, int totalPiecesFinished, double ratePerPiece) {
         super(empID, empName, birthDate, dateHired);
         setTotalPiecesFinished(totalPiecesFinished);
         setRatePerPiece(ratePerPiece);
@@ -34,18 +33,16 @@ public class PieceWorkerEmployee extends Employee {
         double basePay = totalPiecesFinished * ratePerPiece;
         int totalHundreds = totalPiecesFinished / 100;
         double bonusPay = totalHundreds * (10 * ratePerPiece);
-        return basePay + bonusPay + super.computeSalary(currentMonth);
+        return basePay + bonusPay + getBirthdayBonus(currentMonth);
     }
 
     public void displayPieceWorkerEmployee() {
-        System.out.printf("ID: %d | Name: %s | DOB: %s | Hired: %s | Pieces Finished: %d | Rate/Piece: PHP%.2f%n",
-                getEmpID(), getEmpName(), getBirthDate(), getDateHired(), totalPiecesFinished, ratePerPiece);
+        System.out.printf("ID: %d | Name: %s | DOB: %s | Hired: %s | Pieces Finished: %d | Rate/Piece: PHP%.2f%n", getEmpID(), getEmpName(), getBirthDate(), getDateHired(), totalPiecesFinished, ratePerPiece);
     }
 
     @Override
     public String toString() {
-        return String.format(
-                "PieceWorkerEmployee [ID: %d, Name: %s, DOB: %s, Hired: %s, Pieces: %d, Rate: PHP%.2f, Total Salary: PHP%.2f]", getEmpID(), getEmpName(), getBirthDate(), getDateHired(), totalPiecesFinished, ratePerPiece, computeSalary());
+        return String.format("PieceWorkerEmployee [ID: %d, Name: %s, Total Salary: PHP%.2f]", getEmpID(), getEmpName(), computeSalary());
     }
 
     @Override

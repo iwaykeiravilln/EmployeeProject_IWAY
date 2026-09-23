@@ -1,4 +1,4 @@
-package version3;
+package version5;
 
 import java.util.Objects;
 
@@ -34,7 +34,7 @@ public class BasePlusCommissionEmployee extends CommissionEmployee {
 
     @Override
     public String toString() {
-        return String.format("BasePlusCommissionEmployee [ID: %d, Name: %s, DOB: %s, Hired: %s, Sale: PHP%.2f, Base: PHP%.2f, Commission Rate: %.0f%%, Total Salary: PHP%.2f]", getEmpID(), getEmpName(), getBirthDate(), getDateHired(), getTotalSale(), baseSalary, getCommissionRate() * 100, computeSalary());
+        return String.format("BasePlusCommissionEmployee [ID: %d, Name: %s, Total Salary: PHP%.2f]", getEmpID(), getEmpName(), computeSalary());
     }
 
     @Override

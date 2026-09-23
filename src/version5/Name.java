@@ -1,4 +1,4 @@
-package version3;
+package version5;
 
 import java.util.Objects;
 
@@ -90,7 +90,10 @@ public class Name implements Cloneable {
         if (this == obj) return true;
         if (!(obj instanceof Name)) return false;
         Name other = (Name) obj;
-        return firstName.equalsIgnoreCase(other.firstName) && middleName.equalsIgnoreCase(other.middleName) && lastName.equalsIgnoreCase(other.lastName) && suffix.equalsIgnoreCase(other.suffix);
+        return firstName.equalsIgnoreCase(other.firstName)
+                && middleName.equalsIgnoreCase(other.middleName)
+                && lastName.equalsIgnoreCase(other.lastName)
+                && suffix.equalsIgnoreCase(other.suffix);
     }
 
     @Override

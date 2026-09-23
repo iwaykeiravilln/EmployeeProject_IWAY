@@ -1,4 +1,58 @@
 package version4;
 
-public class BasePlusCommissionEmployee {
+import java.util.Objects;
+
+public class BasePlusCommissionEmployee extends CommissionEmployee {
+    private double baseSalary;
+
+    public BasePlusCommissionEmployee() {
+        super();
+        this.baseSalary = 0.0;
+    }
+
+    public BasePlusCommissionEmployee(int empID, Name empName, MyDate birthDate, MyDate dateHired, double totalSale, double baseSalary) {
+        super(empID, empName, birthDate, dateHired, totalSale);
+        setBaseSalary(baseSalary);
+    }
+
+    public double getBaseSalary() {
+        return baseSalary;
+    }
+
+    public void setBaseSalary(double baseSalary) {
+        this.baseSalary = (baseSalary >= 0) ? baseSalary : 0.0;
+    }
+
+    public double computeSalary(int currentMonth) {
+        return baseSalary + super.computeSalary(currentMonth);
+    }
+
+    public void displayBasePlusCommissionEmployee() {
+        System.out.printf("ID: %d | Name: %s | DOB: %s | Hired: %s | Total Sale: PHP%.2f | Base Salary: PHP%.2f%n",
+                getEmpID(), getEmpName(), getBirthDate(), getDateHired(), getTotalSale(), baseSalary);
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "BasePlusCommissionEmployee [ID: %d, Name: %s, DOB: %s, Hired: %s, Sale: PHP%.2f, Base: PHP%.2f, Commission Rate: %.0f%%]", getEmpID(), getEmpName(), getBirthDate(), getDateHired(), getTotalSale(), baseSalary, getCommissionRate() * 100);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!super.equals(obj) || !(obj instanceof BasePlusCommissionEmployee)) return false;
+        BasePlusCommissionEmployee other = (BasePlusCommissionEmployee) obj;
+        return baseSalary == other.baseSalary;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), baseSalary);
+    }
+
+    @Override
+    public BasePlusCommissionEmployee clone() {
+        return (BasePlusCommissionEmployee) super.clone();
+    }
 }

@@ -1,4 +1,4 @@
-package version3;
+package version4;
 
 import java.util.Objects;
 
@@ -24,30 +24,26 @@ public class CommissionEmployee extends Employee {
     }
 
     protected double getCommissionRate() {
-        if (totalSale < 50000) {
-            return 0.05;
-        } else if (totalSale < 100000) {
-            return 0.10;
-        } else if (totalSale < 500000) {
-            return 0.15;
-        } else {
-            return 0.20;
-        }
+        if (totalSale < 50000) return 0.05;
+        else if (totalSale < 100000) return 0.10;
+        else if (totalSale < 500000) return 0.15;
+        else return 0.20;
     }
 
-    @Override
     public double computeSalary(int currentMonth) {
-        return (totalSale * getCommissionRate()) + super.computeSalary(currentMonth);
+        return (totalSale * getCommissionRate()) + getBirthdayBonus(currentMonth);
     }
 
     public void displayCommissionEmployee() {
-        System.out.printf("ID: %d | Name: %s | DOB: %s | Hired: %s | Total Sale: PHP%.2f%n", getEmpID(), getEmpName(), getBirthDate(), getDateHired(), totalSale);
+        System.out.printf("ID: %d | Name: %s | DOB: %s | Hired: %s | Total Sale: PHP%.2f%n",
+                getEmpID(), getEmpName(), getBirthDate(), getDateHired(), totalSale);
     }
 
     @Override
     public String toString() {
         return String.format(
-                "CommissionEmployee [ID: %d, Name: %s, DOB: %s, Hired: %s, Total Sale: PHP%.2f, Commission Rate: %.0f%%, Total Salary: PHP%.2f]", getEmpID(), getEmpName(), getBirthDate(), getDateHired(), totalSale, getCommissionRate() * 100, computeSalary());
+                "CommissionEmployee [ID: %d, Name: %s, DOB: %s, Hired: %s, Total Sale: PHP%.2f, Commission Rate: %.0f%%]",
+                getEmpID(), getEmpName(), getBirthDate(), getDateHired(), totalSale, getCommissionRate() * 100);
     }
 
     @Override

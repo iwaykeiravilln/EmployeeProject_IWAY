@@ -1,4 +1,4 @@
-package version3;
+package version5;
 
 import java.util.Objects;
 
@@ -15,29 +15,21 @@ public class CommissionEmployee extends Employee {
         setTotalSale(totalSale);
     }
 
-    public double getTotalSale() {
-        return totalSale;
-    }
-
+    public double getTotalSale() { return totalSale; }
     public void setTotalSale(double totalSale) {
         this.totalSale = (totalSale >= 0) ? totalSale : 0.0;
     }
 
     protected double getCommissionRate() {
-        if (totalSale < 50000) {
-            return 0.05;
-        } else if (totalSale < 100000) {
-            return 0.10;
-        } else if (totalSale < 500000) {
-            return 0.15;
-        } else {
-            return 0.20;
-        }
+        if (totalSale < 50000) return 0.05;
+        else if (totalSale < 100000) return 0.10;
+        else if (totalSale < 500000) return 0.15;
+        else return 0.20;
     }
 
     @Override
     public double computeSalary(int currentMonth) {
-        return (totalSale * getCommissionRate()) + super.computeSalary(currentMonth);
+        return (totalSale * getCommissionRate()) + getBirthdayBonus(currentMonth);
     }
 
     public void displayCommissionEmployee() {
@@ -46,8 +38,7 @@ public class CommissionEmployee extends Employee {
 
     @Override
     public String toString() {
-        return String.format(
-                "CommissionEmployee [ID: %d, Name: %s, DOB: %s, Hired: %s, Total Sale: PHP%.2f, Commission Rate: %.0f%%, Total Salary: PHP%.2f]", getEmpID(), getEmpName(), getBirthDate(), getDateHired(), totalSale, getCommissionRate() * 100, computeSalary());
+        return String.format("CommissionEmployee [ID: %d, Name: %s, Total Salary: PHP%.2f]", getEmpID(), getEmpName(), computeSalary());
     }
 
     @Override

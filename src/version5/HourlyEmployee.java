@@ -1,4 +1,4 @@
-package version4;
+package version5;
 
 import java.util.Objects;
 
@@ -34,6 +34,7 @@ public class HourlyEmployee extends Employee {
         this.ratePerHour = (ratePerHour >= 0) ? ratePerHour : 0.0;
     }
 
+    @Override
     public double computeSalary(int currentMonth) {
         double basePay;
         if (totalHoursWorked <= 40) {
@@ -47,14 +48,12 @@ public class HourlyEmployee extends Employee {
     }
 
     public void displayHourlyEmployee() {
-        System.out.printf("ID: %d | Name: %s | DOB: %s | Hired: %s | Hours: %.2f | Rate: PHP%.2f/hr%n",
-                getEmpID(), getEmpName(), getBirthDate(), getDateHired(), totalHoursWorked, ratePerHour);
+        System.out.printf("ID: %d | Name: %s | DOB: %s | Hired: %s | Hours: %.2f | Rate: PHP%.2f/hr%n", getEmpID(), getEmpName(), getBirthDate(), getDateHired(), totalHoursWorked, ratePerHour);
     }
 
     @Override
     public String toString() {
-        return String.format(
-                "HourlyEmployee [ID: %d, Name: %s, DOB: %s, Hired: %s, Hours: %.2f, Rate: PHP%.2f]", getEmpID(), getEmpName(), getBirthDate(), getDateHired(), totalHoursWorked, ratePerHour);
+        return String.format("HourlyEmployee [ID: %d, Name: %s, Total Salary: PHP%.2f]", getEmpID(), getEmpName(), computeSalary());
     }
 
     @Override

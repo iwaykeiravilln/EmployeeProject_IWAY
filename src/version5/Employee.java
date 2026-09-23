@@ -1,4 +1,4 @@
-package version4;
+package version5;
 
 import java.util.Objects;
 
@@ -58,6 +58,14 @@ public class Employee implements Cloneable {
         return (birthDate.getMonth() == currentMonth) ? 5000.00 : 0.00;
     }
 
+    public double computeSalary(int currentMonth) {
+        return 0.0;
+    }
+
+    public double computeSalary() {
+        return computeSalary(-1);
+    }
+
     public void displayEmployee() {
         System.out.printf("ID: %d | Name: %s | DOB: %s | Hired: %s%n",
                 empID, empName, birthDate, dateHired);
@@ -65,8 +73,7 @@ public class Employee implements Cloneable {
 
     @Override
     public String toString() {
-        return String.format("Employee [ID: %d, Name: %s, DOB: %s, Hired: %s]",
-                empID, empName, birthDate, dateHired);
+        return String.format("Employee [ID: %d, Name: %s, Total Salary: PHP%.2f]", empID, empName, computeSalary());
     }
 
     @Override
@@ -74,7 +81,10 @@ public class Employee implements Cloneable {
         if (this == obj) return true;
         if (!(obj instanceof Employee)) return false;
         Employee other = (Employee) obj;
-        return empID == other.empID && empName.equals(other.empName) && birthDate.equals(other.birthDate) && dateHired.equals(other.dateHired);
+        return empID == other.empID
+                && empName.equals(other.empName)
+                && birthDate.equals(other.birthDate)
+                && dateHired.equals(other.dateHired);
     }
 
     @Override

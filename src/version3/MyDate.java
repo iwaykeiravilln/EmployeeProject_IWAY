@@ -7,10 +7,7 @@ public class MyDate implements Cloneable {
     private int month;
     private int year;
 
-    private static final String[] MONTH_NAMES = {
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    };
+    private static final String[] MONTH_NAMES = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
     public MyDate() {
         this.day = 1;
@@ -58,7 +55,6 @@ public class MyDate implements Cloneable {
         System.out.println(toString());
     }
 
-    // Format: DD Mon YYYY
     @Override
     public String toString() {
         return String.format("%02d %s %04d", day, MONTH_NAMES[month - 1], year);
@@ -80,7 +76,6 @@ public class MyDate implements Cloneable {
     @Override
     public MyDate clone() {
         try {
-            // Only primitive fields, so super.clone() is a sufficient deep copy
             return (MyDate) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new AssertionError("MyDate should be cloneable", e);
